@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">CibertecProject</string>
+    <string name="name_admi">Administrador</string>
+
+    ---menu options---
+    <string name="str_events_nav">Menu eventos</string>
+    <string name="str_list_events_nav">Lista de Eventos</string>
+    <string name="str_expositor_nav">expositores</string>
+    <string name="str_attendance_nav">Asistencia</string>
+    <string name="str_course_nav">Cursos</string>
+
+    <string name="str_list_expositor_nav">Lista de expositores</string>
+    <string name="str_list_attendance_nav">Lista de asistencia</string>
+    <string name="str_list_courses_nav">Lista de Cursos</string>
+
+    <string name="nav_open_drawer">Open navigation drawer</string>
+    <string name="nav_close_drawer">Close navigation drawer</string>
+
+    <string name="str_menu_toolbar_add">Agregar nuevo evento</string>
+
+
+
+</resources>

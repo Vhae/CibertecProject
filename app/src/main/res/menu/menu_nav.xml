@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:checkableBehavior="single"
+        >
+        <item
+            android:id="@+id/expositor_nav"
+            android:icon="@android:drawable/sym_contact_card"
+            android:title="@string/str_list_expositor_nav"
+            android:checked="true"
+            />
+        <item
+            android:id="@+id/course_nav"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="@string/str_list_courses_nav"
+            />
+        <item
+            android:id="@+id/attendance_nav"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="@string/str_list_attendance_nav"
+            />
+
+    </group>
+
+    <item
+        android:title="@string/str_events_nav"
+        >
+        <menu>
+            <item
+                android:id="@+id/list_events_nav"
+                android:icon="@android:drawable/ic_menu_agenda"
+                android:title="@string/str_list_events_nav"
+                />
+        </menu>
+    </item>
+
+</menu>
