@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager=getSupportFragmentManager();
     final static String BUNDLE_KEY_ACTIVE_FRAGMENT="Active Fragment";
 
-    int activeFragment=0;// para hacer hide al add de menu
+    int activeFragment=0;// parasaber que frament estamos y poder hacer hide al add de menu
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,13 +65,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_add:
                 switch (activeFragment){
                     case 1:
+                        //opcion de menu para Fragment ListEvents
                         Intent createintent=new Intent(this,EventCreateEditActivity.class);
                         startActivity(createintent);
                         return true;
                     case 2:
+                        //opcion de menu para Fragment ListExpositors
                         Toast.makeText(this, "Click en expositor", Toast.LENGTH_SHORT).show();
                         return true;
                     case 3:
+                        //opcion de menu para Fragment ListCourses
                         Toast.makeText(this, "Click en Curso", Toast.LENGTH_SHORT).show();
                         return true;
                 }
@@ -107,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ListEventsFragment listEventsFragment=new ListEventsFragment().newInstance();
                 FragmentTransaction fragmenteventsTransaction=fragmentManager.beginTransaction();
                 fragmenteventsTransaction.replace(R.id.content_frame,listEventsFragment).addToBackStack(null).commit();
-                activeFragment=1;
+                activeFragment=1;//para saber que fragment estamos
                 this.invalidateOptionsMenu();
                 break;
             case R.id.expositor_nav:
@@ -115,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ListExpositorsFragment listExpositorsFragment=new ListExpositorsFragment().newInstance();
                 FragmentTransaction fragmentexpoTransaction=fragmentManager.beginTransaction();
                 fragmentexpoTransaction.replace(R.id.content_frame,listExpositorsFragment).addToBackStack(null).commit();
-                activeFragment=2;
+                activeFragment=2;//para saber que fragment estamos
                 this.invalidateOptionsMenu();
                 break;
             case R.id.course_nav:
@@ -123,14 +126,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ListCoursesFragment listCoursesFragment=new ListCoursesFragment().newInstance();
                 FragmentTransaction fragmentcoursesTransaction=fragmentManager.beginTransaction();
                 fragmentcoursesTransaction.replace(R.id.content_frame,listCoursesFragment).addToBackStack(null).commit();
-                activeFragment=3;
+                activeFragment=3;//para saber que fragment estamos
                 this.invalidateOptionsMenu();
                 break;
             case R.id.attendance_nav:
                 ListAttendanceFragment listAttendanceFragment =new ListAttendanceFragment().newInstance();
                 FragmentTransaction fragmentattenTransaction=fragmentManager.beginTransaction();
                 fragmentattenTransaction.replace(R.id.content_frame,listAttendanceFragment).addToBackStack(null).commit();
-                activeFragment=4;
+                activeFragment=4;//para saber que fragment estamos
                 this.invalidateOptionsMenu();
                 break;
         }
