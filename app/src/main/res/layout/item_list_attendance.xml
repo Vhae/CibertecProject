@@ -4,37 +4,99 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="10dp"
     app:cardCornerRadius="10dp"
     android:elevation="4dp">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
         <TextView
-            android:text="Nombres y apellidos de alumno"
+            android:id="@+id/txt_titu_attend_codEvento"
+            android:text="Evento :"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            ></TextView>
-
-        <RadioGroup
+            android:padding="5dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_attend_codEvento"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Asistio" />
-
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="No Asistio" />
-        </RadioGroup>
-
-
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txt_titu_attend_codEvento"
+            android:text="EV001 - Evento de Programació Android "
+            android:padding="5dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_titu_attend_codCurso"
+            android:text="Curso :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_attend_codEvento"
+            android:padding="5dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_attend_curso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_attend_codEvento"
+            android:layout_toRightOf="@id/txt_titu_attend_codCurso"
+            android:text="CU001 - Android Intermedio"
+            android:padding="5dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_titu_attend_expositor"
+            android:text="Expositor :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_titu_attend_codCurso"
+            android:padding="5dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_attend_expositor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_attend_curso"
+            android:layout_toRightOf="@id/txt_titu_attend_expositor"
+            android:text="EXP001 - Juan Lopez Gamarra"
+            android:padding="5dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_titu_attend_fecha"
+            android:text="Fecha :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_titu_attend_expositor"
+            android:padding="5dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_attend_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_attend_expositor"
+            android:layout_toRightOf="@id/txt_titu_attend_fecha"
+            android:text="10/03/2020"
+            android:padding="5dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_titu_attend_aula"
+            android:text="Aula :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txt_attend_fecha"
+            android:layout_below="@id/txt_attend_expositor"
+            android:padding="5dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_attend_aula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_attend_expositor"
+            android:layout_toRightOf="@id/txt_titu_attend_aula"
+            android:text="A103"
+            android:padding="5dp">
+        </TextView>
+    </RelativeLayout>
 
 
 
