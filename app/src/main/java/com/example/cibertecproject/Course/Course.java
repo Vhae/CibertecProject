@@ -5,6 +5,7 @@ public class Course {
     private int Id_Curso;
     private String Nombre;
     private String Descripcion;
+    private boolean Estado;
 
     public int getId_Curso() {
         return Id_Curso;
@@ -31,4 +32,11 @@ public class Course {
     }
 
 
+    public boolean isEstado() {
+        return Estado;
+    }
+
+    public void setEstado(boolean estado) {
+        Estado = estado;
+    }
 }

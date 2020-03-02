@@ -11,7 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.cibertecproject.Course.ApiCourseClient;
+import com.example.cibertecproject.Course.ApiClient;
+import com.example.cibertecproject.Course.ApiCourseService;
 import com.example.cibertecproject.Course.Course;
 import com.example.cibertecproject.Course.CourseAdapter;
 
@@ -21,8 +22,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -67,12 +66,7 @@ public class ListCoursesFragment extends Fragment {
 
 
     private void CallService() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.62/WcfCibertec/WCFCurso.svc/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiCourseClient ApiCourseClient = retrofit.create(ApiCourseClient.class);
+        ApiCourseService ApiCourseClient = ApiClient.getApiClient().create(ApiCourseService.class);
         Call<List<Course>> call = ApiCourseClient.getCursos();
         call.enqueue(new Callback<List<Course>>() {
             @Override

@@ -46,6 +46,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         LinearLayout llRecycler;
         TextView txtEventItem,txtEventSchedule;
         ImageView imgEdit,imgDelete;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtEventItem=itemView.findViewById(R.id.txtEventItem);
