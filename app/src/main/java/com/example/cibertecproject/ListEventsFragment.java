@@ -26,6 +26,7 @@ public class ListEventsFragment extends Fragment {
 
     public ListEventsFragment() {
         // Required empty public constructor
+        //
     }
 
 
