@@ -52,7 +52,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
             txtEventSchedule=itemView.findViewById(R.id.txtEventSchedule);
             imgEdit=itemView.findViewById(R.id.imgEdit);
             imgDelete=itemView.findViewById(R.id.imgDelete);
-            llRecycler=itemView.findViewById(R.id.llrecycler);
+            //llRecycler=itemView.findViewById(R.id.llrecycler);
             itemView.setOnClickListener(this);
             imgEdit.setOnClickListener(this);
             imgDelete.setOnClickListener(this);
@@ -61,19 +61,21 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         @Override
         public void onClick(View view) {
             int mPosition = getLayoutPosition();
-            switch(view.getId()){
-                case R.id.imgEdit:
-                    Intent addintent=new Intent(view.getContext(),AddCourseEventActivity.class);
-                    view.getContext().startActivity(addintent);
-                    break;
-                case R.id.imgDelete:
-                    // Se elimina
-                    Toast.makeText(view.getContext(), "Se Elimina uno", Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.llrecycler:
-                    Intent intent=new Intent(view.getContext(),EventCreateEditActivity.class);
-                    view.getContext().startActivity(intent);
-                    break;
+            int v=view.getId();
+            if(v==R.id.imgDelete||v==R.id.imgEdit){
+                switch(view.getId()){
+                    case R.id.imgEdit:
+                        Intent addintent=new Intent(view.getContext(),AddCourseEventActivity.class);
+                        view.getContext().startActivity(addintent);
+                        break;
+                    case R.id.imgDelete:
+                        // Se elimina
+                        Toast.makeText(view.getContext(), "Se Elimina uno", Toast.LENGTH_SHORT).show();
+                        break;
+            }
+            }else{
+                Intent intent=new Intent(view.getContext(),EventCreateEditActivity.class);
+                view.getContext().startActivity(intent);
             }
         }
     }
