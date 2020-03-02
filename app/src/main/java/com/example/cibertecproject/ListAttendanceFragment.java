@@ -32,7 +32,6 @@ public class ListAttendanceFragment extends Fragment {
     public static ListAttendanceFragment newInstance() {
         
         Bundle args = new Bundle();
-        
         ListAttendanceFragment fragment = new ListAttendanceFragment();
         fragment.setArguments(args);
         return fragment;
