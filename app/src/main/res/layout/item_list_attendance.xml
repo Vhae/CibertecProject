@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="3dp"
     app:cardCornerRadius="10dp"
     android:elevation="4dp">
     <RelativeLayout
@@ -12,93 +12,63 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/imgviewlinea"
+            android:layout_width="20dp"
+            android:layout_height="68dp"
+            android:src="@drawable/linedividir">
+
+        </ImageView>
         <TextView
             android:id="@+id/txt_titu_attend_codEvento"
             android:text="Evento :"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:layout_toRightOf="@id/imgviewlinea"
+            android:padding="2dp">
         </TextView>
         <TextView
-            android:id="@+id/txt_attend_codEvento"
+            android:id="@+id/txt_attend_Evento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/txt_titu_attend_codEvento"
-            android:text="EV001 - Evento de Programació Android "
-            android:padding="5dp">
+            android:padding="2dp">
         </TextView>
         <TextView
             android:id="@+id/txt_titu_attend_codCurso"
             android:text="Curso :"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_attend_codEvento"
-            android:padding="5dp">
+            android:layout_toRightOf="@id/imgviewlinea"
+            android:layout_below="@id/txt_titu_attend_codEvento"
+            android:padding="2dp">
         </TextView>
         <TextView
             android:id="@+id/txt_attend_curso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_attend_codEvento"
+            android:layout_below="@id/txt_attend_Evento"
             android:layout_toRightOf="@id/txt_titu_attend_codCurso"
-            android:text="CU001 - Android Intermedio"
-            android:padding="5dp">
+            android:padding="2dp">
         </TextView>
-        <TextView
-            android:id="@+id/txt_titu_attend_expositor"
-            android:text="Expositor :"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_titu_attend_codCurso"
-            android:padding="5dp">
-        </TextView>
-        <TextView
-            android:id="@+id/txt_attend_expositor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_attend_curso"
-            android:layout_toRightOf="@id/txt_titu_attend_expositor"
-            android:text="EXP001 - Juan Lopez Gamarra"
-            android:padding="5dp">
-        </TextView>
+
         <TextView
             android:id="@+id/txt_titu_attend_fecha"
             android:text="Fecha :"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_titu_attend_expositor"
-            android:padding="5dp">
+            android:layout_toRightOf="@id/imgviewlinea"
+            android:layout_below="@id/txt_titu_attend_codCurso"
+            android:padding="2dp">
         </TextView>
         <TextView
             android:id="@+id/txt_attend_fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_attend_expositor"
+            android:layout_below="@id/txt_attend_curso"
             android:layout_toRightOf="@id/txt_titu_attend_fecha"
-            android:text="10/03/2020"
-            android:padding="5dp">
-        </TextView>
-        <TextView
-            android:id="@+id/txt_titu_attend_aula"
-            android:text="Aula :"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/txt_attend_fecha"
-            android:layout_below="@id/txt_attend_expositor"
-            android:padding="5dp">
-        </TextView>
-        <TextView
-            android:id="@+id/txt_attend_aula"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_attend_expositor"
-            android:layout_toRightOf="@id/txt_titu_attend_aula"
-            android:text="A103"
-            android:padding="5dp">
+            android:padding="2dp">
         </TextView>
     </RelativeLayout>
-
-
-
-
 </androidx.cardview.widget.CardView>
