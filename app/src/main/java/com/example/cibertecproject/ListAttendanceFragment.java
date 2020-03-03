@@ -91,6 +91,7 @@ public class ListAttendanceFragment extends Fragment {
         modelEvents.setNombres("Programación Visual Studio.NET");
         modelEvents.setNombcurso("C# Avanzado");
         modelEvents.setFecha("15/07/2020");
+
         lstUserEvents.add(modelEvents);
         adapterAttendance=new AdapterAttendance(lstUserEvents,getContext());
         recyclerView.setAdapter(adapterAttendance);

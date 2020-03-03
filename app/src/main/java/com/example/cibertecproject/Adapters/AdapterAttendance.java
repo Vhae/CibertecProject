@@ -1,17 +1,23 @@
 package com.example.cibertecproject.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.cibertecproject.AttendanceActivity;
+import com.example.cibertecproject.ListAttendanceDetalleFragment;
+import com.example.cibertecproject.ListAttendanceFragment;
 import com.example.cibertecproject.Modelo.UserEvents;
 import com.example.cibertecproject.R;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AdapterAttendance extends RecyclerView.Adapter<AdapterAttendance.ViewHolder> {
@@ -44,7 +50,7 @@ public class AdapterAttendance extends RecyclerView.Adapter<AdapterAttendance.Vi
         return lstUserEvents.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView txtv_Evento,txtv_Curso,txtv_Fecha;
 
         public ViewHolder(@NonNull View itemView) {
@@ -52,6 +58,14 @@ public class AdapterAttendance extends RecyclerView.Adapter<AdapterAttendance.Vi
             txtv_Evento=itemView.findViewById(R.id.txt_attend_Evento);
             txtv_Curso=itemView.findViewById(R.id.txt_attend_curso);
             txtv_Fecha=itemView.findViewById(R.id.txt_attend_fecha);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(context, AttendanceActivity.class);
+            context.startActivity(intent);
+
         }
     }
 }
