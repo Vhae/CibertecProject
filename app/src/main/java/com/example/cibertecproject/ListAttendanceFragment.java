@@ -9,10 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ListAttendanceFragment extends Fragment {
 
 
@@ -32,7 +28,6 @@ public class ListAttendanceFragment extends Fragment {
     public static ListAttendanceFragment newInstance() {
         
         Bundle args = new Bundle();
-        
         ListAttendanceFragment fragment = new ListAttendanceFragment();
         fragment.setArguments(args);
         return fragment;

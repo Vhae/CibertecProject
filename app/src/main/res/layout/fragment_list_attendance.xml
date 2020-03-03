@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListAttendanceFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:layout_margin="20dp"
+    tools:context=".ListEventsFragment">
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/str_list_attendance_nav" />
+        android:layout_marginBottom="20dp"
+        android:id="@+id/txtEventList"
+        android:layout_centerHorizontal="true"
+        android:textSize="4mm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/str_list_attendance_nav"></TextView>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewAttendanceList"
+        android:layout_below="@+id/txtEventList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
