@@ -37,7 +37,8 @@ public class AdapterAttendanceDetalle extends RecyclerView.Adapter<AdapterAttend
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Attendance attendance=lstAttendance.get(position);
-        holder.txtv_attendance_det_nombres.setText(attendance.getApeMaterno()+" "+attendance.getApeMaterno()+", "+attendance.getNombres() );
+        holder.txtv_attendance_det_item.setText(String.valueOf(position+1)+".- ");
+        holder.txtv_attendance_det_nombres.setText(attendance.getApePaterno()+" "+attendance.getApeMaterno()+", "+attendance.getNombres() );
         holder.chk_attendance_asistio.setChecked(true);
 
     }
@@ -48,11 +49,12 @@ public class AdapterAttendanceDetalle extends RecyclerView.Adapter<AdapterAttend
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
-        TextView txtv_attendance_det_nombres;
+        TextView txtv_attendance_det_item,txtv_attendance_det_nombres;
         CheckBox chk_attendance_asistio,chk_attendance_noasistio;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            txtv_attendance_det_item=itemView.findViewById(R.id.txtv_attendance_det_item);
             txtv_attendance_det_nombres=itemView.findViewById(R.id.txtv_attendance_det_nombres);
             chk_attendance_asistio=itemView.findViewById(R.id.chk_attendance_asistio);
             chk_attendance_noasistio=itemView.findViewById(R.id.chk_attendance_noasistio);
