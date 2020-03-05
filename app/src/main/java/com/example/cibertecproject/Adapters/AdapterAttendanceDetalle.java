@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,7 +50,7 @@ public class AdapterAttendanceDetalle extends RecyclerView.Adapter<AdapterAttend
         return lstAttendance.size();
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder{
+    public  class ViewHolder extends RecyclerView.ViewHolder implements CheckBox.OnCheckedChangeListener {
         TextView txtv_attendance_det_item,txtv_attendance_det_nombres;
         CheckBox chk_attendance_asistio,chk_attendance_noasistio;
 
@@ -58,6 +60,21 @@ public class AdapterAttendanceDetalle extends RecyclerView.Adapter<AdapterAttend
             txtv_attendance_det_nombres=itemView.findViewById(R.id.txtv_attendance_det_nombres);
             chk_attendance_asistio=itemView.findViewById(R.id.chk_attendance_asistio);
             chk_attendance_noasistio=itemView.findViewById(R.id.chk_attendance_noasistio);
+
+            chk_attendance_asistio.setOnCheckedChangeListener(this);
+            chk_attendance_noasistio.setOnCheckedChangeListener(this);
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            switch (buttonView.getId()){
+                case R.id.chk_attendance_asistio:
+                    chk_attendance_noasistio.setChecked(false);
+                    break;
+                case R.id.chk_attendance_noasistio:
+                    chk_attendance_asistio.setChecked(false);
+                    break;
+            }
         }
     }
 }

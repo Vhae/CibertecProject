@@ -58,7 +58,7 @@ public class ListAttendanceFragment extends Fragment {
         modelEvents.setFecha("10/03/2020");
         lstUserEvents.add(modelEvents);
 
-        modelEvents=new UserEvents();
+        /*modelEvents=new UserEvents();
         modelEvents.setId(2);
         modelEvents.setNombres("Diseño de Interiores");
         modelEvents.setNombcurso("Autocat");
@@ -90,7 +90,7 @@ public class ListAttendanceFragment extends Fragment {
         modelEvents.setId(6);
         modelEvents.setNombres("Programación Visual Studio.NET");
         modelEvents.setNombcurso("C# Avanzado");
-        modelEvents.setFecha("15/07/2020");
+        modelEvents.setFecha("15/07/2020");*/
 
         lstUserEvents.add(modelEvents);
         adapterAttendance=new AdapterAttendance(lstUserEvents,getContext());

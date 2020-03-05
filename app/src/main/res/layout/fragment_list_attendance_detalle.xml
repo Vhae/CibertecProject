@@ -160,6 +160,16 @@
         android:textStyle="bold"
         android:layout_below="@+id/recyclerviewAttendanceListDetalle">
     </TextView>
+    <Button
+        android:id="@+id/btnGrabarAsistencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/txtv_total_inscription"
+        android:text="Graba Asistencia">
+
+    </Button>
 
 
 </RelativeLayout>

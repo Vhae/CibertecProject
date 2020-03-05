@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cibertecproject.Adapters.AdapterAttendanceDetalle;
 import com.example.cibertecproject.Modelo.Attendance;
@@ -25,6 +27,7 @@ public class ListAttendanceDetalleFragment extends Fragment {
     private AdapterAttendanceDetalle adapterAttendanceDetalle;
     private List<Attendance> lstAttendance;
     private TextView txtv_total_inscription;
+    private Button btnGrabarAsistencia;
 
     public ListAttendanceDetalleFragment() {
         // Required empty public constructor
@@ -53,6 +56,13 @@ public class ListAttendanceDetalleFragment extends Fragment {
     private void inicializarControles(View view) {
         recyclerView=view.findViewById(R.id.recyclerviewAttendanceListDetalle);
         txtv_total_inscription=view.findViewById(R.id.txtv_total_inscription);
+        btnGrabarAsistencia=view.findViewById(R.id.btnGrabarAsistencia);
+        btnGrabarAsistencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"Grabado Correctamente la Asistencia",Toast.LENGTH_SHORT).show();
+            }
+        });
         lstAttendance=new ArrayList<>();
     }
 
