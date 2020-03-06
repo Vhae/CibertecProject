@@ -42,8 +42,6 @@ public class AdapterAttendanceDetalle extends RecyclerView.Adapter<AdapterAttend
         Attendance attendance=lstAttendance.get(position);
         holder.txtv_attendance_det_item.setText(String.valueOf(position+1)+".- ");
         holder.txtv_attendance_det_nombres.setText(attendance.getApePaterno()+" "+attendance.getApeMaterno()+", "+attendance.getNombres() );
-        //holder.chk_attendance_asistio.setChecked(true);
-
     }
 
     @Override
