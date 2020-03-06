@@ -1,6 +1,7 @@
 package com.example.cibertecproject.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class AdapterAttendanceDetalle extends RecyclerView.Adapter<AdapterAttend
         Attendance attendance=lstAttendance.get(position);
         holder.txtv_attendance_det_item.setText(String.valueOf(position+1)+".- ");
         holder.txtv_attendance_det_nombres.setText(attendance.getApePaterno()+" "+attendance.getApeMaterno()+", "+attendance.getNombres() );
-        holder.chk_attendance_asistio.setChecked(true);
+        //holder.chk_attendance_asistio.setChecked(true);
 
     }
 
@@ -50,7 +51,7 @@ public class AdapterAttendanceDetalle extends RecyclerView.Adapter<AdapterAttend
         return lstAttendance.size();
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder implements CheckBox.OnCheckedChangeListener {
+    public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txtv_attendance_det_item,txtv_attendance_det_nombres;
         CheckBox chk_attendance_asistio,chk_attendance_noasistio;
 
@@ -61,15 +62,16 @@ public class AdapterAttendanceDetalle extends RecyclerView.Adapter<AdapterAttend
             chk_attendance_asistio=itemView.findViewById(R.id.chk_attendance_asistio);
             chk_attendance_noasistio=itemView.findViewById(R.id.chk_attendance_noasistio);
 
-            chk_attendance_asistio.setOnCheckedChangeListener(this);
-            chk_attendance_noasistio.setOnCheckedChangeListener(this);
+            chk_attendance_asistio.setOnClickListener(this);
+            chk_attendance_noasistio.setOnClickListener(this);
         }
 
         @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            switch (buttonView.getId()){
+        public void onClick(View v) {
+            switch (v.getId()){
                 case R.id.chk_attendance_asistio:
                     chk_attendance_noasistio.setChecked(false);
+
                     break;
                 case R.id.chk_attendance_noasistio:
                     chk_attendance_asistio.setChecked(false);
