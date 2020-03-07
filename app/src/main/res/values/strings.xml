@@ -20,6 +20,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nombre_curso">Nombre Curso</string>
+    <string name="nombre_curso_ed">Nombre curso</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="costo">Costo</string>
+    <string name="titulo_crear_curso">Agregar Curso</string>
+    <string name="btn_guardar_Course">Guardar</string>
 
 
 </resources>

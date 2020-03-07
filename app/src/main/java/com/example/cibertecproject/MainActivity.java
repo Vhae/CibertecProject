@@ -111,7 +111,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         return true;
                     case 3:
                         //opcion de menu para Fragment ListCourses
-                        Toast.makeText(this, "Click en Curso", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(this,AddCourseEventActivity.class);
+                        startActivity(intent);
                         return true;
                 }
                 return true;
