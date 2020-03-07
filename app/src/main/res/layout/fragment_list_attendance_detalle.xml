@@ -150,6 +150,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewAttendanceListDetalle"
         android:layout_below="@+id/relatidetattendance"
+        android:layout_above="@+id/txtv_total_inscription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
@@ -158,15 +159,16 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:textStyle="bold"
-        android:layout_below="@+id/recyclerviewAttendanceListDetalle">
+        android:layout_above="@+id/btnGrabarAsistencia"
+        >
     </TextView>
     <Button
         android:id="@+id/btnGrabarAsistencia"
+        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/txtv_total_inscription"
         android:text="Graba Asistencia">
 
     </Button>
