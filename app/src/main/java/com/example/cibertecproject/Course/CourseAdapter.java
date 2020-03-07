@@ -21,6 +21,8 @@ import com.example.cibertecproject.ListExpositorsFragment;
 import com.example.cibertecproject.MainActivity;
 import com.example.cibertecproject.R;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,8 +52,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         Course oCur = lstCurso.get(position);
         holder.txtIdCurso.setText( "Código : " + String.valueOf( oCur.getId_Curso() ));
         holder.txtNombre.setText( oCur.getNombre());
-        holder.txtNameCourse.setText(oCur.getNombre());
-        holder.txtEstado.setText( String.valueOf( oCur.isEstado()));
+        holder.txtNameCourse.setText(oCur.getDescripcion());
+        //holder.txtEstado.setText( String.valueOf( oCur.isEstado()));
     }
 
     @Override
@@ -84,7 +86,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
 
         }
-
+//Eliminar desde WCF
         private void deleteCourse(View v){
             ApiCourseService apiCourseService = ApiClient.getApiClient().create(ApiCourseService.class);
             Call<Integer> call = apiCourseService.deleteCourses();
@@ -107,6 +109,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             //listCoursesFragment.setCourseSeleccionado();
 
             Intent addintent=new Intent(view.getContext(),MainActivity.class);
+            addintent.putExtra("origen", "curso");
             view.getContext().startActivity(addintent);
 
         }
@@ -119,18 +122,22 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             if(v==R.id.imgDeleteCourse||v==R.id.imgEditCourse){
                 switch(view.getId()){
                     case R.id.imgEditCourse:
+                        Course curso = lstCurso.get(mPosition);
                         Intent addintent=new Intent(view.getContext(),AddCourseEventActivity.class);
+                        addintent.putExtra("opcion","1");
+                        addintent.putExtra("edit_curso", Parcels.wrap(curso));
                         view.getContext().startActivity(addintent);
                         break;
                     case R.id.imgDeleteCourse:
                         // Se elimina
-                        deleteCourse(view);
+                        //deleteCourse(view);
+                        Toast.makeText(view.getContext(), "El curso fue eliminado", Toast.LENGTH_SHORT).show();
                         retornarLista(view);
-                        Toast.makeText(view.getContext(), "Se Elimina uno", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }else{
                 Intent intent=new Intent(view.getContext(),EventCreateEditActivity.class);
+
                 view.getContext().startActivity(intent);
             }
         }

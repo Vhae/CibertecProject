@@ -61,11 +61,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             activeFragment=savedInstanceState.getInt(BUNDLE_KEY_ACTIVE_FRAGMENT,0);
 
         }else{
-            ListEventsFragment listEventsFragment=new ListEventsFragment().newInstance();
-            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.content_frame,listEventsFragment).commit();
-            activeFragment=1;
+            if(getIntent().hasExtra("origen") ){
 
+                ListCoursesFragment listCoursesFragment=new ListCoursesFragment().newInstance();
+                FragmentTransaction fragmentcoursesTransaction=fragmentManager.beginTransaction();
+                fragmentcoursesTransaction.replace(R.id.content_frame,listCoursesFragment).addToBackStack(null).commit();
+                activeFragment=3;//para saber que fragment estamos
+                this.invalidateOptionsMenu();
+            }else {
+                ListEventsFragment listEventsFragment = new ListEventsFragment().newInstance();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.content_frame, listEventsFragment).commit();
+                activeFragment = 1;
+            }
         }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             createNotificationChannel(CHANNEL_ID, "Canal de Notificaciones");

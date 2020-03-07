@@ -32,6 +32,8 @@ import retrofit2.Response;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import org.parceler.Parcels;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -63,10 +65,29 @@ public class ListCoursesFragment extends Fragment  {
         recyCursos = rootView.findViewById(R.id.RecyListCourses);
         recyCursos.setLayoutManager(new LinearLayoutManager(this.getContext()));
         lstCurso = new ArrayList<>();
+
+        Course course= new Course();
+        course.setId_Curso(1);
+        course.setNombre("Java");
+        course.setDescripcion("Programacion Java");
+        lstCurso.add( course);
+
+        Course course2= new Course();
+        course2.setId_Curso(2);
+        course2.setNombre(".NET");
+        course2.setDescripcion("Programacion .Net");
+        lstCurso.add( course2);
+
+        Course course3= new Course();
+        course3.setId_Curso(3);
+        course3.setNombre("Android");
+        course3.setDescripcion("Programacion Movil");
+        lstCurso.add( course3);
+
         cursoAdapter = new CourseAdapter(lstCurso);
         recyCursos.setAdapter(cursoAdapter);
 
-        CallService();
+        //CallService();
         return rootView;
 
     }
@@ -85,7 +106,7 @@ public class ListCoursesFragment extends Fragment  {
         return fragment;
     }
 
-
+//Lista desde el servicio
     private void CallService() {
         ApiCourseService ApiCourseClient = ApiClient.getApiClient().create(ApiCourseService.class);
         Call<List<Course>> call = ApiCourseClient.getCursos();
@@ -99,7 +120,9 @@ public class ListCoursesFragment extends Fragment  {
 
             @Override
             public void onFailure(Call<List<Course>> call, Throwable t) {
+
                 t.printStackTrace();
+
             }
         });
     }

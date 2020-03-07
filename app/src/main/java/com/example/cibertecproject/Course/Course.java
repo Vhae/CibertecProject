@@ -1,5 +1,9 @@
 package com.example.cibertecproject.Course;
 
+
+import org.parceler.Parcel;
+
+@Parcel
 public class Course {
 
     private int Id_Curso;
