@@ -42,30 +42,9 @@ public class ListCoursesFragment extends Fragment  {
     private List<Course> lstCurso;
 
 
-    CourseListener courseListener;
-    MainActivity mainActivity;
-
-    public interface CourseListener {
-        void onCourseListener();
-    }
-
-    public void setCourseListener(CourseListener listener) {
-        this.courseListener=listener;
-    }
-
-    public void setCourseSeleccionado(){
-        courseListener.onCourseListener();
-    }
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        try {
-            courseListener = (CourseListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
-        }
-
 
     }
 

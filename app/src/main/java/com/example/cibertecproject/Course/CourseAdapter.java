@@ -59,7 +59,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         return lstCurso.size();
     }
 
-    class CourseViewHolder extends RecyclerView.ViewHolder {
+    class CourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView txtIdCurso ;
         private TextView txtNombre ;
@@ -75,16 +75,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             txtNombre = itemView.findViewById(R.id.txtNombre);
             txtNameCourse = itemView.findViewById(R.id.txtNameCourse);
             imgvDeleteCourse = itemView.findViewById(R.id.imgDeleteCourse);
+            imgvEditCourse = itemView.findViewById(R.id.imgEditCourse);
             txtEstado = itemView.findViewById(R.id.txtEstado);
 
-            imgvDeleteCourse.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    deleteCourse(v);
-                    retornarLista(v);
 
-                }
-            });
+            imgvEditCourse.setOnClickListener(this);
+            imgvDeleteCourse.setOnClickListener(this);
+
 
         }
 
@@ -115,7 +112,28 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         }
 
 
-
+        @Override
+        public void onClick(View view) {
+            int mPosition = getLayoutPosition();
+            int v=view.getId();
+            if(v==R.id.imgDeleteCourse||v==R.id.imgEditCourse){
+                switch(view.getId()){
+                    case R.id.imgEditCourse:
+                        Intent addintent=new Intent(view.getContext(),AddCourseEventActivity.class);
+                        view.getContext().startActivity(addintent);
+                        break;
+                    case R.id.imgDeleteCourse:
+                        // Se elimina
+                        deleteCourse(view);
+                        retornarLista(view);
+                        Toast.makeText(view.getContext(), "Se Elimina uno", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }else{
+                Intent intent=new Intent(view.getContext(),EventCreateEditActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        }
     }
 
 

@@ -12,7 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddCourseEventActivity"></activity>
+        <service
+            android:name=".MyIntentService"
+            android:exported="false"></service>
+
+        <activity android:name=".AddCourseEventActivity" />
         <activity android:name=".EventCreateEditActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

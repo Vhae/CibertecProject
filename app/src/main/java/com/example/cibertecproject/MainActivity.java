@@ -10,24 +10,34 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.cibertecproject.Modelo.Event;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ListCoursesFragment.CourseListener {
+import java.sql.Array;
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     ActionBarDrawerToggle toggle;
     NavigationView navView;
     FragmentManager fragmentManager=  getSupportFragmentManager();
     final static String BUNDLE_KEY_ACTIVE_FRAGMENT="Active Fragment";
+    public static final String CHANNEL_ID = "Canal de Notificaciones";
 
-    int activeFragment=0;// para hacer hide al add de menu
+    int activeFragment=0;// parasaber que frament estamos y poder hacer hide al add de menu
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +67,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             activeFragment=1;
 
         }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            createNotificationChannel(CHANNEL_ID, "Canal de Notificaciones");
+        }
+        //creamos data y llenamos para probar la notificacion
+        ArrayList<String> fechas=new ArrayList<String>();
+        ArrayList<String> name= new ArrayList<String>();
+        ArrayList<Event> idEvento=new ArrayList<Event>();
+        Boolean probando=true;
 
+        Event Item1=new Event("prueba","07-03-2020 00:59:00");
+        idEvento.add(Item1);
+        Event Item2=new Event("prueba2","06-03-2020 23:06:00");
+        idEvento.add(Item2);
+
+        int size=idEvento.size();//vemos el tamaño de la lista eventos
+
+        for(int i=0;i<size;i++){//le damos los valores de la lista eventos a las otras dos listas para pasarlo por el intent al IntentService
+            fechas.add(idEvento.get(i).getSchedule());
+            name.add(idEvento.get(i).getName());
+        }
+        //hacemos un intent al IntentService y le mandamos la data
+        Intent serviceIntent= new Intent(this,MyIntentService.class);
+        serviceIntent.putStringArrayListExtra("fechas",fechas);
+        serviceIntent.putStringArrayListExtra("name",name);
+        startService(serviceIntent);// inicializamos el service
+        //MyIntentService.running=false;//este comando es para detener el IntentService y despues inicializarlo de nuevo con la nueva data
     }
 
     @Override
@@ -66,13 +101,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_add:
                 switch (activeFragment){
                     case 1:
+                        //opcion de menu para Fragment ListEvents
                         Intent createintent=new Intent(this,EventCreateEditActivity.class);
                         startActivity(createintent);
                         return true;
                     case 2:
+                        //opcion de menu para Fragment ListExpositors
                         Toast.makeText(this, "Click en expositor", Toast.LENGTH_SHORT).show();
                         return true;
                     case 3:
+                        //opcion de menu para Fragment ListCourses
                         Toast.makeText(this, "Click en Curso", Toast.LENGTH_SHORT).show();
                         return true;
                 }
@@ -108,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ListEventsFragment listEventsFragment=new ListEventsFragment().newInstance();
                 FragmentTransaction fragmenteventsTransaction=fragmentManager.beginTransaction();
                 fragmenteventsTransaction.replace(R.id.content_frame,listEventsFragment).addToBackStack(null).commit();
-                activeFragment=1;
+                activeFragment=1;//para saber que fragment estamos
                 this.invalidateOptionsMenu();
                 break;
             case R.id.expositor_nav:
@@ -116,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ListExpositorsFragment listExpositorsFragment=new ListExpositorsFragment().newInstance();
                 FragmentTransaction fragmentexpoTransaction=fragmentManager.beginTransaction();
                 fragmentexpoTransaction.replace(R.id.content_frame,listExpositorsFragment).addToBackStack(null).commit();
-                activeFragment=2;
+                activeFragment=2;//para saber que fragment estamos
                 this.invalidateOptionsMenu();
                 break;
             case R.id.course_nav:
@@ -124,14 +162,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ListCoursesFragment listCoursesFragment=new ListCoursesFragment().newInstance();
                 FragmentTransaction fragmentcoursesTransaction=fragmentManager.beginTransaction();
                 fragmentcoursesTransaction.replace(R.id.content_frame,listCoursesFragment).addToBackStack(null).commit();
-                activeFragment=3;
+                activeFragment=3;//para saber que fragment estamos
                 this.invalidateOptionsMenu();
                 break;
             case R.id.attendance_nav:
                 ListAttendanceFragment listAttendanceFragment =new ListAttendanceFragment().newInstance();
                 FragmentTransaction fragmentattenTransaction=fragmentManager.beginTransaction();
                 fragmentattenTransaction.replace(R.id.content_frame,listAttendanceFragment).addToBackStack(null).commit();
-                activeFragment=4;
+                activeFragment=4;//para saber que fragment estamos
                 this.invalidateOptionsMenu();
                 break;
         }
@@ -150,7 +188,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-
+    private void createNotificationChannel(String id, String name){
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if(notificationManager != null){
+            notificationManager.createNotificationChannel(
+                    new NotificationChannel(
+                            id,
+                            name,
+                            NotificationManager.IMPORTANCE_HIGH
+                    )
+            );
+        }
+    }
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
@@ -167,16 +217,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onAttachFragment(@NonNull Fragment fragment) {
         super.onAttachFragment(fragment);
-        if (fragment instanceof ListCoursesFragment) {
-            ListCoursesFragment courseListener = (ListCoursesFragment) fragment;
-            courseListener.setCourseListener(this);
-        }
+
     }
 
-    @Override
-    public void onCourseListener() {
-        ListCoursesFragment listCoursesFragment=new ListCoursesFragment().newInstance();
-        FragmentTransaction fragmentcoursesTransaction=fragmentManager.beginTransaction();
-        fragmentcoursesTransaction.replace(R.id.content_frame,listCoursesFragment).addToBackStack(null).commit();
-    }
+
 }
