@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    tools:context=".ListEventsFragment">
+
+    <TextView
+        android:id="@+id/txtEventList"
+        android:layout_centerHorizontal="true"
+        android:textSize="4mm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/str_list_attendance_nav_detalle"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"
+        android:layout_below="@+id/txtEventList">
+
+    </TextView>
+    <RelativeLayout
+        android:id="@+id/relatidetattendance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_below="@+id/txtEventList">
+        <TextView
+            android:id="@+id/txtv_titu_attendance_detEvent_Evento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="2dp"
+            android:text="Evento : ">
+         </TextView>
+        <TextView
+            android:id="@+id/txtv_attendance_detEvent_Evento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txtv_titu_attendance_detEvent_Evento"
+            android:padding="2dp"
+            android:text="Programación Android">
+        </TextView>
+        <TextView
+            android:id="@+id/txtv_titu_attendance_detEvent_Curso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtv_titu_attendance_detEvent_Evento"
+            android:padding="2dp"
+            android:textStyle="bold"
+            android:text="Curso : ">
+        </TextView>
+        <TextView
+            android:id="@+id/txtv_attendance_detEvent_Curso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtv_attendance_detEvent_Evento"
+            android:layout_toRightOf="@id/txtv_titu_attendance_detEvent_Curso"
+            android:padding="2dp"
+            android:text="Android Intermedio">
+        </TextView>
+        <TextView
+            android:id="@+id/txtv_titu_attendance_detEvent_Expositor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtv_titu_attendance_detEvent_Curso"
+            android:textStyle="bold"
+            android:padding="2dp"
+            android:text="Expositor : ">
+        </TextView>
+        <TextView
+            android:id="@+id/txtv_attendance_detEvent_Expositor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtv_attendance_detEvent_Curso"
+            android:layout_toRightOf="@id/txtv_titu_attendance_detEvent_Expositor"
+            android:padding="2dp"
+            android:text="Juan Lopez Vega">
+        </TextView>
+        <TextView
+            android:id="@+id/txtv_titu_attendance_detEvent_Fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtv_titu_attendance_detEvent_Expositor"
+            android:textStyle="bold"
+            android:padding="2dp"
+            android:text="Fecha : ">
+        </TextView>
+        <TextView
+            android:id="@+id/txtv_attendance_detEvent_Fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:layout_below="@id/txtv_attendance_detEvent_Expositor"
+            android:layout_toRightOf="@id/txtv_titu_attendance_detEvent_Fecha"
+            android:padding="2dp"
+            android:text="10/03/2020">
+        </TextView>
+        <TextView
+            android:id="@+id/txtv_titu_attendance_detEvent_HoraInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txtv_attendance_detEvent_Fecha"
+            android:layout_below="@+id/txtv_titu_attendance_detEvent_Expositor"
+            android:textStyle="bold"
+            android:padding="2dp"
+            android:text="Hora Inicio : ">
+        </TextView>
+        <TextView
+            android:id="@+id/txtv_attendance_detEvent_HoraInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:layout_below="@id/txtv_attendance_detEvent_Expositor"
+            android:layout_toRightOf="@id/txtv_titu_attendance_detEvent_HoraInicio"
+            android:padding="2dp"
+            android:text="08:00">
+        </TextView>
+        <TextView
+            android:id="@+id/txtv_titu_attendance_detEvent_HoraFin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txtv_attendance_detEvent_HoraInicio"
+            android:layout_below="@+id/txtv_titu_attendance_detEvent_Expositor"
+            android:textStyle="bold"
+            android:padding="2dp"
+            android:text="Hora Fin : ">
+        </TextView>
+        <TextView
+            android:id="@+id/txtv_attendance_detEvent_HoraFin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtv_attendance_detEvent_Expositor"
+            android:layout_toRightOf="@id/txtv_titu_attendance_detEvent_HoraFin"
+            android:padding="2dp"
+            android:text="16:00">
+        </TextView>
+        </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"
+        android:layout_below="@+id/relatidetattendance">
+
+    </TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewAttendanceListDetalle"
+        android:layout_below="@+id/relatidetattendance"
+        android:layout_above="@+id/txtv_total_inscription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/txtv_total_inscription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:layout_above="@+id/btnGrabarAsistencia"
+        >
+    </TextView>
+    <Button
+        android:id="@+id/btnGrabarAsistencia"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_centerHorizontal="true"
+        android:text="Graba Asistencia">
+
+    </Button>
+
+
+</RelativeLayout>

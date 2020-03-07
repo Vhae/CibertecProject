@@ -4,39 +4,71 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="3dp"
     app:cardCornerRadius="10dp"
     android:elevation="4dp">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/imgviewlinea"
+            android:layout_width="20dp"
+            android:layout_height="68dp"
+            android:src="@drawable/linedividir">
+
+        </ImageView>
         <TextView
-            android:text="Nombres y apellidos de alumno"
+            android:id="@+id/txt_titu_attend_codEvento"
+            android:text="Evento :"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            ></TextView>
-
-        <RadioGroup
+            android:layout_toRightOf="@id/imgviewlinea"
+            android:padding="2dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_attend_Evento"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txt_titu_attend_codEvento"
+            android:padding="2dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_titu_attend_codCurso"
+            android:text="Curso :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imgviewlinea"
+            android:layout_below="@id/txt_titu_attend_codEvento"
+            android:padding="2dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_attend_curso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_attend_Evento"
+            android:layout_toRightOf="@id/txt_titu_attend_codCurso"
+            android:padding="2dp">
+        </TextView>
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Asistio" />
-
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="No Asistio" />
-        </RadioGroup>
-
-
-    </LinearLayout>
-
-
-
-
+        <TextView
+            android:id="@+id/txt_titu_attend_fecha"
+            android:text="Fecha :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imgviewlinea"
+            android:layout_below="@id/txt_titu_attend_codCurso"
+            android:padding="2dp">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_attend_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_attend_curso"
+            android:layout_toRightOf="@id/txt_titu_attend_fecha"
+            android:padding="2dp">
+        </TextView>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>
