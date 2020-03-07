@@ -9,22 +9,32 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.cibertecproject.Modelo.Event;
 import com.google.android.material.navigation.NavigationView;
+
+import java.sql.Array;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ActionBarDrawerToggle toggle;
     NavigationView navView;
     FragmentManager fragmentManager=getSupportFragmentManager();
     final static String BUNDLE_KEY_ACTIVE_FRAGMENT="Active Fragment";
+    public static final String CHANNEL_ID = "Canal de Notificaciones";
 
     int activeFragment=0;// parasaber que frament estamos y poder hacer hide al add de menu
     @Override
@@ -56,7 +66,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             activeFragment=1;
 
         }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            createNotificationChannel(CHANNEL_ID, "Canal de Notificaciones");
+        }
+        //creamos data y llenamos para probar la notificacion
+        ArrayList<String> fechas=new ArrayList<String>();
+        ArrayList<String> name= new ArrayList<String>();
+        ArrayList<Event> idEvento=new ArrayList<Event>();
+        Boolean probando=true;
 
+        Event Item1=new Event("prueba","07-03-2020 00:59:00");
+        idEvento.add(Item1);
+        Event Item2=new Event("prueba2","06-03-2020 23:06:00");
+        idEvento.add(Item2);
+
+        int size=idEvento.size();//vemos el tamaño de la lista eventos
+
+        for(int i=0;i<size;i++){//le damos los valores de la lista eventos a las otras dos listas para pasarlo por el intent al IntentService
+            fechas.add(idEvento.get(i).getSchedule());
+            name.add(idEvento.get(i).getName());
+        }
+        //hacemos un intent al IntentService y le mandamos la data
+        Intent serviceIntent= new Intent(this,MyIntentService.class);
+        serviceIntent.putStringArrayListExtra("fechas",fechas);
+        serviceIntent.putStringArrayListExtra("name",name);
+        startService(serviceIntent);// inicializamos el service
+        //MyIntentService.running=false;//este comando es para detener el IntentService y despues inicializarlo de nuevo con la nueva data
     }
 
     @Override
@@ -152,7 +187,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-
+    private void createNotificationChannel(String id, String name){
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if(notificationManager != null){
+            notificationManager.createNotificationChannel(
+                    new NotificationChannel(
+                            id,
+                            name,
+                            NotificationManager.IMPORTANCE_HIGH
+                    )
+            );
+        }
+    }
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
