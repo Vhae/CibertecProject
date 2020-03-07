@@ -10,10 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cibertecproject.AddCourseEventActivity;
 import com.example.cibertecproject.EventCreateEditActivity;
+import com.example.cibertecproject.ListCoursesFragment;
+import com.example.cibertecproject.ListExpositorsFragment;
 import com.example.cibertecproject.MainActivity;
 import com.example.cibertecproject.R;
 
@@ -23,7 +27,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder>
+        {
     private List<Course> lstCurso;
 
     public CourseAdapter(List<Course> lstCurso) {
@@ -76,6 +81,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                 @Override
                 public void onClick(View v) {
                     deleteCourse(v);
+                    retornarLista(v);
 
                 }
             });
@@ -99,6 +105,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
         }
 
+        public void retornarLista(View view){
+            //ListCoursesFragment listCoursesFragment=new ListCoursesFragment().newInstance();
+            //listCoursesFragment.setCourseSeleccionado();
+
+            Intent addintent=new Intent(view.getContext(),MainActivity.class);
+            view.getContext().startActivity(addintent);
+
+        }
 
 
 

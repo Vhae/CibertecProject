@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -20,10 +21,10 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ListCoursesFragment.CourseListener {
     ActionBarDrawerToggle toggle;
     NavigationView navView;
-    FragmentManager fragmentManager=getSupportFragmentManager();
+    FragmentManager fragmentManager=  getSupportFragmentManager();
     final static String BUNDLE_KEY_ACTIVE_FRAGMENT="Active Fragment";
 
     int activeFragment=0;// para hacer hide al add de menu
@@ -154,5 +155,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         outState.putInt(BUNDLE_KEY_ACTIVE_FRAGMENT,activeFragment);
+    }
+
+    public void setCourseList(){
+        ListCoursesFragment listCoursesFragment=new ListCoursesFragment().newInstance();
+        FragmentTransaction fragmentcoursesTransaction=fragmentManager.beginTransaction();
+        fragmentcoursesTransaction.replace(R.id.content_frame,listCoursesFragment).addToBackStack(null).commit();
+    }
+
+
+    @Override
+    public void onAttachFragment(@NonNull Fragment fragment) {
+        super.onAttachFragment(fragment);
+        if (fragment instanceof ListCoursesFragment) {
+            ListCoursesFragment courseListener = (ListCoursesFragment) fragment;
+            courseListener.setCourseListener(this);
+        }
+    }
+
+    @Override
+    public void onCourseListener() {
+        ListCoursesFragment listCoursesFragment=new ListCoursesFragment().newInstance();
+        FragmentTransaction fragmentcoursesTransaction=fragmentManager.beginTransaction();
+        fragmentcoursesTransaction.replace(R.id.content_frame,listCoursesFragment).addToBackStack(null).commit();
     }
 }
