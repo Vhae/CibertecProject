@@ -82,7 +82,7 @@ public class MyIntentService extends IntentService {
                     }else{
                         // lo mismo que arriba solo que para avisar de que tiene que pasar lista;
                         Boolean proof1=true;
-                        if(diff<=-30*60*1000){
+                        if(diff<=-30*60*1000 && diff>= 120*60*1000){
                             int size1=noList2.size();
                             for(int j=0;j<size1;j++){
                                 if(name.get(i).equals(noList2.get(j))){
