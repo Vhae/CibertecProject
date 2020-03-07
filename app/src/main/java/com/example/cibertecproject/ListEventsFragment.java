@@ -36,9 +36,9 @@ public class ListEventsFragment extends Fragment {
         // Inflate the layout for this fragment
         final View rootView=inflater.inflate(R.layout.fragment_list_events, container, false);
 
-        Event Item1=new Event("prueba","pruebafecha");
+        Event Item1=new Event("Asesoria de JavaScript","En este evento se va estudiar acerca de javascript");
         testList.add(Item1);
-        Event Item2=new Event("prueba2","pruebafecha2");
+        Event Item2=new Event("creando nuestra primera app con Android","En este evento se va repasar elementos basicos de android");
         testList.add(Item2);
         recyclerviewEventList=rootView.findViewById(R.id.recyclerviewEventList);
         recyclerviewEventList.setAdapter(new EventListAdapter(testList));
