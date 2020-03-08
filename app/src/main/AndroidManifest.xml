@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cibertecproject">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +15,6 @@
         <service
             android:name=".MyIntentService"
             android:exported="false"></service>
-
-        <activity android:name=".AddCourseEventActivity" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -32,7 +31,6 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_map"></activity>
-        <activity android:name=".AddCourseEventActivity" />
         <activity android:name=".EventCreateEditActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
