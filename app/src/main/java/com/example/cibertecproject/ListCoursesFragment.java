@@ -43,11 +43,22 @@ public class ListCoursesFragment extends Fragment  {
     private CourseAdapter cursoAdapter;
     private List<Course> lstCurso;
 
+    static Fragment fragmentRes;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
+    }
+
+    public static ListCoursesFragment newInstance(){
+
+        Bundle args = new Bundle();
+
+        ListCoursesFragment fragment = new ListCoursesFragment();
+        fragment.setArguments(args);
+        fragmentRes = fragment;
+        return fragment;
     }
 
     public ListCoursesFragment() {
@@ -61,11 +72,10 @@ public class ListCoursesFragment extends Fragment  {
         // Inflate the layout for this fragment
         final View rootView=inflater.inflate(R.layout.fragment_list_courses, container, false);
 
-
         recyCursos = rootView.findViewById(R.id.RecyListCourses);
         recyCursos.setLayoutManager(new LinearLayoutManager(this.getContext()));
         lstCurso = new ArrayList<>();
-
+/*
         Course course= new Course();
         course.setId_Curso(1);
         course.setNombre("Java");
@@ -83,11 +93,16 @@ public class ListCoursesFragment extends Fragment  {
         course3.setNombre("Android");
         course3.setDescripcion("Programacion Movil");
         lstCurso.add( course3);
-
-        cursoAdapter = new CourseAdapter(lstCurso);
+*/
+        cursoAdapter = new CourseAdapter(lstCurso,fragmentRes);
+        cursoAdapter.setOnItemClicListener(new CourseAdapter.OnItemClicListener() {
+            @Override
+            public void onItemClic(int posistion) {
+                setActualizarLista();
+            }
+        });
         recyCursos.setAdapter(cursoAdapter);
-
-        //CallService();
+        CallService();
         return rootView;
 
     }
@@ -97,14 +112,7 @@ public class ListCoursesFragment extends Fragment  {
         super.onDetach();
     }
 
-    public static ListCoursesFragment newInstance(){
-        
-        Bundle args = new Bundle();
-        
-        ListCoursesFragment fragment = new ListCoursesFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
 //Lista desde el servicio
     private void CallService() {
@@ -127,7 +135,10 @@ public class ListCoursesFragment extends Fragment  {
         });
     }
 
-
+    public void setActualizarLista(){
+        lstCurso.clear();
+        CallService();
+    }
 
 
 

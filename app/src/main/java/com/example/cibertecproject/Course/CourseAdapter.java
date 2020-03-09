@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,9 +34,23 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         {
     private List<Course> lstCurso;
 
-    public CourseAdapter(List<Course> lstCurso) {
+    ListCoursesFragment fragmentRes;
+
+    private OnItemClicListener onItemClicListener;
+
+    public interface OnItemClicListener{
+        void onItemClic(int posistion);
+    }
+
+    public void setOnItemClicListener(OnItemClicListener onItemClicListener){
+        this.onItemClicListener = onItemClicListener ;
+    }
+
+
+    public CourseAdapter(List<Course> lstCurso, Fragment fragment) {
         super();
         this.lstCurso = lstCurso;
+        fragmentRes= (ListCoursesFragment) fragment;
     }
 
     @NonNull
@@ -43,6 +58,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_course,parent,false);
+
 
         return new CourseViewHolder(view);
     }
@@ -60,6 +76,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public int getItemCount() {
         return lstCurso.size();
     }
+
+
 
     class CourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -80,12 +98,39 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             imgvEditCourse = itemView.findViewById(R.id.imgEditCourse);
             txtEstado = itemView.findViewById(R.id.txtEstado);
 
-
             imgvEditCourse.setOnClickListener(this);
             imgvDeleteCourse.setOnClickListener(this);
 
 
         }
+        @Override
+        public void onClick(View view) {
+            int mPosition = getLayoutPosition();
+            int v=view.getId();
+            if(v==R.id.imgDeleteCourse||v==R.id.imgEditCourse){
+                switch(view.getId()){
+                    case R.id.imgEditCourse:
+                        Course curso = lstCurso.get(mPosition);
+                        Intent addintent=new Intent(view.getContext(),AddCourseEventActivity.class);
+                        addintent.putExtra("opcion","1");
+                        addintent.putExtra("edit_curso", Parcels.wrap(curso));
+                        view.getContext().startActivity(addintent);
+                        break;
+                    case R.id.imgDeleteCourse:
+                        // Se elimina
+                        deleteCourse(view);
+                        onItemClicListener.onItemClic(getAdapterPosition());
+                        Toast.makeText(view.getContext(), "El curso fue eliminado", Toast.LENGTH_SHORT).show();
+                        retornarLista(view);
+                        break;
+                }
+            }else{
+                Intent intent=new Intent(view.getContext(),EventCreateEditActivity.class);
+
+                view.getContext().startActivity(intent);
+            }
+        }
+
 //Eliminar desde WCF
         private void deleteCourse(View v){
             ApiCourseService apiCourseService = ApiClient.getApiClient().create(ApiCourseService.class);
@@ -106,41 +151,17 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
         public void retornarLista(View view){
             //ListCoursesFragment listCoursesFragment=new ListCoursesFragment().newInstance();
-            //listCoursesFragment.setCourseSeleccionado();
+            //fragmentRes.setActualizarLista();
 
+            /*
             Intent addintent=new Intent(view.getContext(),MainActivity.class);
             addintent.putExtra("origen", "curso");
             view.getContext().startActivity(addintent);
-
+             */
         }
 
 
-        @Override
-        public void onClick(View view) {
-            int mPosition = getLayoutPosition();
-            int v=view.getId();
-            if(v==R.id.imgDeleteCourse||v==R.id.imgEditCourse){
-                switch(view.getId()){
-                    case R.id.imgEditCourse:
-                        Course curso = lstCurso.get(mPosition);
-                        Intent addintent=new Intent(view.getContext(),AddCourseEventActivity.class);
-                        addintent.putExtra("opcion","1");
-                        addintent.putExtra("edit_curso", Parcels.wrap(curso));
-                        view.getContext().startActivity(addintent);
-                        break;
-                    case R.id.imgDeleteCourse:
-                        // Se elimina
-                        //deleteCourse(view);
-                        Toast.makeText(view.getContext(), "El curso fue eliminado", Toast.LENGTH_SHORT).show();
-                        retornarLista(view);
-                        break;
-                }
-            }else{
-                Intent intent=new Intent(view.getContext(),EventCreateEditActivity.class);
 
-                view.getContext().startActivity(intent);
-            }
-        }
     }
 
 
