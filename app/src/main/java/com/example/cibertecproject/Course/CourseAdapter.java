@@ -24,6 +24,8 @@ import com.example.cibertecproject.R;
 
 import org.parceler.Parcels;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,7 +36,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         {
     private List<Course> lstCurso;
 
-    ListCoursesFragment fragmentRes;
 
     private OnItemClicListener onItemClicListener;
 
@@ -47,10 +48,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     }
 
 
-    public CourseAdapter(List<Course> lstCurso, Fragment fragment) {
+    public CourseAdapter(List<Course> lstCurso) {
         super();
         this.lstCurso = lstCurso;
-        fragmentRes= (ListCoursesFragment) fragment;
     }
 
     @NonNull
@@ -59,17 +59,18 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_course,parent,false);
 
-
         return new CourseViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         Course oCur = lstCurso.get(position);
-        holder.txtIdCurso.setText( "Código : " + String.valueOf( oCur.getId_Curso() ));
+        holder.txtIdCurso.setText( String.valueOf( oCur.getId_Curso() ));
         holder.txtNombre.setText( oCur.getNombre());
         holder.txtNameCourse.setText(oCur.getDescripcion());
-        //holder.txtEstado.setText( String.valueOf( oCur.isEstado()));
+        holder.txtEstado.setText( String.valueOf( oCur.getEstado()));
+        holder.txtFechaInicio.setText(  strDate ( oCur.getFechaInicio() ));
+
     }
 
     @Override
@@ -77,7 +78,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         return lstCurso.size();
     }
 
-
+    private String strDate(Date date){
+        SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
+        return sdformat.format(date);
+    }
 
     class CourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -86,7 +90,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         private TextView txtDescripcion;
         private TextView txtNameCourse, txtEstado;
         private ImageView imgvEditCourse, imgvDeleteCourse;
-
+        private TextView txtFechaInicio;
 
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -97,19 +101,19 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             imgvDeleteCourse = itemView.findViewById(R.id.imgDeleteCourse);
             imgvEditCourse = itemView.findViewById(R.id.imgEditCourse);
             txtEstado = itemView.findViewById(R.id.txtEstado);
-
+            txtFechaInicio = itemView.findViewById(R.id.txtFechaInicio);
             imgvEditCourse.setOnClickListener(this);
             imgvDeleteCourse.setOnClickListener(this);
 
-
         }
+
         @Override
         public void onClick(View view) {
             int mPosition = getLayoutPosition();
             int v=view.getId();
             if(v==R.id.imgDeleteCourse||v==R.id.imgEditCourse){
                 switch(view.getId()){
-                    case R.id.imgEditCourse:
+                    case R.id.imgEditCourse: //Editar Curso
                         Course curso = lstCurso.get(mPosition);
                         Intent addintent=new Intent(view.getContext(),AddCourseEventActivity.class);
                         addintent.putExtra("opcion","1");
@@ -117,28 +121,26 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                         view.getContext().startActivity(addintent);
                         break;
                     case R.id.imgDeleteCourse:
-                        // Se elimina
-                        deleteCourse(view);
+                        // Se elimina un curso
+                        int Id_Curso =  Integer.parseInt( txtIdCurso.getText().toString());
+                        deleteCourse(Id_Curso);
                         onItemClicListener.onItemClic(getAdapterPosition());
                         Toast.makeText(view.getContext(), "El curso fue eliminado", Toast.LENGTH_SHORT).show();
-                        retornarLista(view);
+
                         break;
                 }
-            }else{
-                Intent intent=new Intent(view.getContext(),EventCreateEditActivity.class);
-
-                view.getContext().startActivity(intent);
             }
         }
 
 //Eliminar desde WCF
-        private void deleteCourse(View v){
+        private void deleteCourse(int Id_Curso){
             ApiCourseService apiCourseService = ApiClient.getApiClient().create(ApiCourseService.class);
-            Call<Integer> call = apiCourseService.deleteCourses();
+            //String pId_Curso = String.valueOf(Id_Curso);
+            Call<Integer> call = apiCourseService.deleteCourse(Id_Curso);
             call.enqueue(new Callback<Integer>() {
                 @Override
                 public void onResponse(Call<Integer> call, Response<Integer> response) {
-
+                    int resDelete = response.body();
                 }
 
                 @Override
@@ -146,19 +148,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     t.printStackTrace();
                 }
             });
-
         }
 
-        public void retornarLista(View view){
-            //ListCoursesFragment listCoursesFragment=new ListCoursesFragment().newInstance();
-            //fragmentRes.setActualizarLista();
 
-            /*
-            Intent addintent=new Intent(view.getContext(),MainActivity.class);
-            addintent.putExtra("origen", "curso");
-            view.getContext().startActivity(addintent);
-             */
-        }
 
 
 

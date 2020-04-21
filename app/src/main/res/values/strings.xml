@@ -22,12 +22,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="nombre_curso">Nombre Curso</string>
+    <string name="course_nombre_curso">Nombre de Curso :</string>
     <string name="nombre_curso_ed">Nombre curso</string>
-    <string name="descripcion">Descripcion</string>
-    <string name="costo">Costo</string>
-    <string name="titulo_crear_curso">Agregar Curso</string>
+    <string name="descripcion">Descripcion :</string>
+    <string name="course_costo">Costo :</string>
+    <string name="titulo_crear_curso">Registrar Curso</string>
     <string name="btn_guardar_Course">Guardar</string>
+    <string name="lbllugarCurso">Sede :</string>
+    <string name="lblFechainicio">Fecha de Inicio :</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 

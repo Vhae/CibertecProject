@@ -49,6 +49,12 @@ android:layout_height="wrap_content"
                 android:text="[Descripcion]"></TextView>
 
             <TextView
+                android:id="@+id/txtFechaInicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="[FechaInicio]" />
+
+            <TextView
                 android:id="@+id/txtEstado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +71,8 @@ android:layout_height="wrap_content"
                     android:id="@+id/imgEditCourse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_edit">
+                    android:src="@drawable/edit_icon_cla"
+                    >
 
                 </ImageView>
 
@@ -73,7 +80,8 @@ android:layout_height="wrap_content"
                     android:id="@+id/imgDeleteCourse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@android:drawable/ic_menu_delete"
+                    android:src="@drawable/trash_icon_red_24"
+
                     />
 
             </LinearLayout>

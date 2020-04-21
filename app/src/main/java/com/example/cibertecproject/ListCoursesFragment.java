@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.cibertecproject.Course.ApiClient;
 import com.example.cibertecproject.Course.ApiCourseService;
@@ -42,8 +43,7 @@ public class ListCoursesFragment extends Fragment  {
     private RecyclerView recyCursos;
     private CourseAdapter cursoAdapter;
     private List<Course> lstCurso;
-
-    static Fragment fragmentRes;
+    private TextView txtResument;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -57,7 +57,6 @@ public class ListCoursesFragment extends Fragment  {
 
         ListCoursesFragment fragment = new ListCoursesFragment();
         fragment.setArguments(args);
-        fragmentRes = fragment;
         return fragment;
     }
 
@@ -72,29 +71,12 @@ public class ListCoursesFragment extends Fragment  {
         // Inflate the layout for this fragment
         final View rootView=inflater.inflate(R.layout.fragment_list_courses, container, false);
 
+        txtResument = rootView.findViewById(R.id.txtResumen);
         recyCursos = rootView.findViewById(R.id.RecyListCourses);
         recyCursos.setLayoutManager(new LinearLayoutManager(this.getContext()));
         lstCurso = new ArrayList<>();
-/*
-        Course course= new Course();
-        course.setId_Curso(1);
-        course.setNombre("Java");
-        course.setDescripcion("Programacion Java");
-        lstCurso.add( course);
 
-        Course course2= new Course();
-        course2.setId_Curso(2);
-        course2.setNombre(".NET");
-        course2.setDescripcion("Programacion .Net");
-        lstCurso.add( course2);
-
-        Course course3= new Course();
-        course3.setId_Curso(3);
-        course3.setNombre("Android");
-        course3.setDescripcion("Programacion Movil");
-        lstCurso.add( course3);
-*/
-        cursoAdapter = new CourseAdapter(lstCurso,fragmentRes);
+        cursoAdapter = new CourseAdapter(lstCurso);
         cursoAdapter.setOnItemClicListener(new CourseAdapter.OnItemClicListener() {
             @Override
             public void onItemClic(int posistion) {
@@ -117,26 +99,29 @@ public class ListCoursesFragment extends Fragment  {
 //Lista desde el servicio
     private void CallService() {
         ApiCourseService ApiCourseClient = ApiClient.getApiClient().create(ApiCourseService.class);
-        Call<List<Course>> call = ApiCourseClient.getCursos();
+        Call<List<Course>> call = ApiCourseClient.getCursosMySql();
         call.enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
+                response.body();
                 List<Course> lstCourses = response.body();
                 lstCurso.addAll(lstCourses);
                 cursoAdapter.notifyDataSetChanged();
+                txtResument.setText( "Cantidad de cursos :" + lstCourses.size() );
             }
 
             @Override
             public void onFailure(Call<List<Course>> call, Throwable t) {
-
                 t.printStackTrace();
-
             }
         });
+        int r =0;
+        int x= 0;
     }
 
     public void setActualizarLista(){
         lstCurso.clear();
+        cursoAdapter.notifyDataSetChanged();
         CallService();
     }
 
